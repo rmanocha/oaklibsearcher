@@ -17,17 +17,7 @@ class GoodreadsQueryAPI(object):
         reviews = self.soup('review')
         isbns = []
         for review in reviews:
-            isbns.append(GoodreadsBook(review.find('isbn13').text,
-                                       review.find('title').text))
-
-            #isbns.append(review.find('isbn13').text)
+            isbns.append({'isbn': review.find('isbn13').text,
+                          'title': review.find('title').text})
 
         return isbns
-
-class GoodreadsBook(object):
-    def __init__(self, isbn, title):
-        self.isbn = isbn
-        self.title = title
-
-    def __str__(self):
-        return "{title}<{isbn}>".format(title=self.title, isbn=self.isbn)
