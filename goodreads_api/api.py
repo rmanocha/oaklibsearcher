@@ -13,7 +13,7 @@ class GoodreadsQueryAPI(object):
         self.soup = BeautifulSoup(response.content, 'xml')
 
     
-    def get_isbns(self):
+    def get_books(self):
         reviews = self.soup('review')
         isbns = []
         for review in reviews:
