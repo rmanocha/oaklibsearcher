@@ -1,7 +1,8 @@
 from oaklibapi import OaklandLibraryAPI
 from goodreads_api import GoodreadsQueryAPI
 
-from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID
+from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID, \
+        NOTIFICATIONS_COUNT
 
 gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY)
 
@@ -16,6 +17,9 @@ for book in gdr.get_books():
     olib = OaklandLibraryAPI(book['isbn'])
     if olib.is_available():
         books_available.append(olib)
+
+    if len(books_available) >= NOTIFICATIONS_COUNT:
+        break
 
 for olib in books_available:
     print("Book with title={} is available".format(olib.title()))
