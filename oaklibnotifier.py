@@ -1,6 +1,7 @@
 from oaklibapi import OaklandLibraryAPI
 from goodreads_api import GoodreadsQueryAPI
 
+import logging
 import smtplib
 
 from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID, \
@@ -14,9 +15,10 @@ gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY)
 books_available = []
 
 for book in gdr.get_books():
-    print("Looking for title={}, ISBN={}".format(book['title'], book['isbn']))
+    logging.info("Looking for title={}, ISBN={}".format(
+                                                book['title'], book['isbn']))
     if not book['isbn']:
-        print("No ISBN available. Skipping")
+        logging.warn("No ISBN available. Skipping")
         continue
 
     olib = OaklandLibraryAPI(book['isbn'])
@@ -30,20 +32,20 @@ notification_message = ""
 
 for olib in books_available:
     msg = "Book with title={} is available".format(olib.title())
-    print(msg)
+    logging.info(msg)
     notification_message += msg + "\n"
 
 if notification_message:
     email_msg = "Subject: {}\n\n{}".format(NOTIFICATION_SUBJECT, notification_message)
 
-    print("Connecting to gmail")
+    logging.debug("Connecting to gmail")
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.login(NOTIFICATION_SENDER_USER, NOTIFICATION_SENDER_PASS)
-    print("Connected to gmail")
+    logging.debug("Connected to gmail")
 
-    print("Sending email")
+    logging.debug("Sending email")
     server.sendmail(NOTIFICATION_SENDER_USER, NOTIFICATION_RECIPIENT, 
             email_msg)
     server.quit()
-    print("Email sent")
+    logging.info("Email sent")
