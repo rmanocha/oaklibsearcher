@@ -1,2 +1,13 @@
+import logging
+
 GOODREADS_ACCESS_KEY={access_key}
 GOODREADS_USER_ID={user_id}
+
+NOTIFICATIONS_COUNT = 5 // # of books to notify about availability
+NOTIFICATION_RECIPIENT = {email_address}
+NOTIFICATION_SENDER_USER = {email_address}
+NOTIFICATION_SENDER_PASS = {email_password}
+
+LOGGING_LEVEL = logging.INFO
+logging.basicConfig(filename="oaklib.log", level=LOGGING_LEVEL,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")

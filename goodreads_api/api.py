@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # For now, the "to-read" shelf is hardcoded
-GOODREADS_QUERY_URL = "https://www.goodreads.com/review/list?v=2&key={access_key}&id={user_id}&shelf=to-read&per_page=200"
+GOODREADS_QUERY_URL = "https://www.goodreads.com/review/list?v=2&key={access_key}&id={user_id}&shelf=to-read&per_page=200&sort=position"
 
 class GoodreadsQueryAPI(object):
     def __init__(self, user_id, access_key):
