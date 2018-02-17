@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GoodreadsResponse>
+  <Request>
+    <authentication>true</authentication>
+      <key><![CDATA[vWdjjc02NmGuSb1WKgR8A]]></key>
+    <method><![CDATA[review_list]]></method>
+  </Request>
+  
+  <shelf exclusive='true' id='247097469' name='to-read' sortable='true'></shelf>
+
+<reviews start="1" end="27" total="27">
+    <review>
+  <id>2296123657</id>
+    <book>
+  <id type="integer">33916061</id>
+  <isbn>0399590560</isbn>
+  <isbn13>9780399590566</isbn13>
+  <text_reviews_count type="integer">946</text_reviews_count>
+  <uri>kca://book/amzn1.gr.book.v1.4uHUru4ohV0XD-DV-mreUg</uri>
+  <title>We Were Eight Years in Power: An American Tragedy</title>
+  <title_without_series>We Were Eight Years in Power: An American Tragedy</title_without_series>
+  <image_url>https://images.gr-assets.com/books/1507903203m/33916061.jpg</image_url>
+  <small_image_url>https://images.gr-assets.com/books/1507903203s/33916061.jpg</small_image_url>
+  <large_image_url/>
+  <link>https://www.goodreads.com/book/show/33916061-we-were-eight-years-in-power</link>
+  <num_pages>367</num_pages>
+  <format>Hardcover</format>
+  <edition_information/>
+  <publisher>One World</publisher>
+  <publication_day>3</publication_day>
+  <publication_year>2017</publication_year>
+  <publication_month>10</publication_month>
+  <average_rating>4.48</average_rating>
+  <ratings_count>6022</ratings_count>
+  <description>&lt;b&gt;A sweeping collection of new and selected essays on the Obama era by the National Book Award-winning author of &lt;i&gt;Between the World and Me&lt;/i&gt;&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;"We were eight years in power" was the lament of Reconstruction-era black politicians as the American experiment in multiracial democracy ended with the return of white supremacist rule in the South. Now Ta-Nehisi Coates explores the tragic echoes of that history in our own time: the unprecedented election of a black president followed by a vicious backlash that fueled the election of the man Coates argues is America's "first white president."&lt;br /&gt;&lt;br /&gt;But the story of these present-day eight years is not just about presidential politics. This book also examines the new voices, ideas, and movements for justice that emerged over this period--and the effects of the persistent, haunting shadow of our nation's old and unreconciled history. Coates powerfully examines the events of the Obama era from his intimate and revealing perspective--the point of view of a young writer who begins the journey in an unemployment office in Harlem and ends it in the Oval Office, interviewing a president.&lt;br /&gt;&lt;br /&gt;&lt;i&gt;We Were Eight Years in Power &lt;/i&gt;features Coates's iconic essays first published in &lt;i&gt;The Atlantic, &lt;/i&gt; including "Fear of a Black President," "The Case for Reparations," and "The Black Family in the Age of Mass Incarceration," along with eight fresh essays that revisit each year of the Obama administration through Coates's own experiences, observations, and intellectual development, capped by a bracingly original assessment of the election that fully illuminated the tragedy of the Obama era. &lt;i&gt;We Were Eight Years in Power&lt;/i&gt; is a vital account of modern America, from one of the definitive voices of this historic moment.</description>
+<authors>
+<author>
+<id>1214964</id>
+<name>Ta-Nehisi Coates</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[https://images.gr-assets.com/authors/1300129823p5/1214964.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[https://images.gr-assets.com/authors/1300129823p2/1214964.jpg]]>
+</small_image_url>
+<link><![CDATA[https://www.goodreads.com/author/show/1214964.Ta_Nehisi_Coates]]></link>
+<average_rating>4.34</average_rating>
+<ratings_count>149360</ratings_count>
+<text_reviews_count>18546</text_reviews_count>
+</author>
+</authors>
+  <published>2017</published>
+<work>  <id>54881780</id>
+  <uri>kca://work/amzn1.gr.work.v1.qHWLkEiyuv9uTq35wE5WIA</uri>
+</work></book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf exclusive='true' id='247097469' name='to-read' review_shelf_id='1942716960' sortable='true'></shelf>
+
+</shelves>
+
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Wed Feb 14 14:22:02 -0800 2018</date_added>
+  <date_updated>Wed Feb 14 14:22:02 -0800 2018</date_updated>
+  <read_count>0</read_count>
+  <body>
+  </body>
+
+  
+
+  <comments_count>0</comments_count>
+    <url><![CDATA[https://www.goodreads.com/review/show/2296123657]]></url>
+  <link><![CDATA[https://www.goodreads.com/review/show/2296123657]]></link>
+    <owned>0</owned>
+</review>
+
+    <review>
+  <id>2291668582</id>
+    <book>
+  <id type="integer">168668</id>
+  <isbn>0684833395</isbn>
+  <isbn13>9780684833392</isbn13>
+  <text_reviews_count type="integer">12482</text_reviews_count>
+  <uri>kca://book/amzn1.gr.book.v1.bnDiMekj5pk1csnAkoPABw</uri>
+  <title>Catch-22 (Catch-22, #1)</title>
+  <title_without_series>Catch-22</title_without_series>
+  <image_url>https://images.gr-assets.com/books/1463157317m/168668.jpg</image_url>
+  <small_image_url>https://images.gr-assets.com/books/1463157317s/168668.jpg</small_image_url>
+  <large_image_url/>
+  <link>https://www.goodreads.com/book/show/168668.Catch_22</link>
+  <num_pages>453</num_pages>
+  <format>Paperback</format>
+  <edition_information/>
+  <publisher>Simon &amp; Schuster </publisher>
+  <publication_day>4</publication_day>
+  <publication_year>2004</publication_year>
+  <publication_month>9</publication_month>
+  <average_rating>3.98</average_rating>
+  <ratings_count>609861</ratings_count>
+  <description>The novel is set during World War II, from 1942 to 1944. It mainly follows the life of Captain John Yossarian, a U.S. Army Air Forces B-25 bombardier. Most of the events in the book occur while the fictional 256th Squadron is based on the island of Pianosa, in the Mediterranean Sea, west of Italy. The novel looks into the experiences of Yossarian and the other airmen in the camp, who attempt to maintain their sanity while fulfilling their service requirements so that they may return home.</description>
+<authors>
+<author>
+<id>3167</id>
+<name>Joseph Heller</name>
+<role></role>
+<image_url nophoto='false'>
+<![CDATA[https://images.gr-assets.com/authors/1197308614p5/3167.jpg]]>
+</image_url>
+<small_image_url nophoto='false'>
+<![CDATA[https://images.gr-assets.com/authors/1197308614p2/3167.jpg]]>
+</small_image_url>
+<link><![CDATA[https://www.goodreads.com/author/show/3167.Joseph_Heller]]></link>
+<average_rating>3.96</average_rating>
+<ratings_count>629534</ratings_count>
+<text_reviews_count>15569</text_reviews_count>
+</author>
+</authors>
+  <published>2004</published>
+<work>  <id>814330</id>
+  <uri>kca://work/amzn1.gr.work.v1.TGfOLXjds8UOkVpgIJnfFg</uri>
+</work></book>
+
+
+  <rating>0</rating>
+  <votes>0</votes>
+  <spoiler_flag>false</spoiler_flag>
+  <spoilers_state>none</spoilers_state>
+  
+
+<shelves>
+
+    <shelf exclusive='true' id='247097469' name='to-read' review_shelf_id='1938290374' sortable='true'></shelf>
+
+</shelves>
+
+  <recommended_for></recommended_for>
+  <recommended_by></recommended_by>
+  <started_at></started_at>
+  <read_at></read_at>
+  <date_added>Sat Feb 10 17:10:16 -0800 2018</date_added>
+  <date_updated>Sat Feb 10 17:10:16 -0800 2018</date_updated>
+  <read_count>0</read_count>
+  <body>
+  </body>
+
+  
+
+  <comments_count>0</comments_count>
+    <url><![CDATA[https://www.goodreads.com/review/show/2291668582]]></url>
+  <link><![CDATA[https://www.goodreads.com/review/show/2291668582]]></link>
+    <owned>0</owned>
+</review>
+</reviews>
+
+</GoodreadsResponse>
