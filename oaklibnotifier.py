@@ -10,42 +10,55 @@ from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID, \
 
 NOTIFICATION_SUBJECT = "Books available at Oakland Library"
 
-gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY)
+class CheckNotifyBooks(object):
+    def __init__(self):
+        self.gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY)
+        self.books_available = []
 
-books_available = []
-
-for book in gdr.get_books():
-    logging.info("Looking for title={}, ISBN={}".format(
+    def check_books(self):
+        for book in self.gdr.get_books():
+            logging.info("Looking for title={}, ISBN={}".format(
                                                 book['title'], book['isbn']))
-    if not book['isbn']:
-        logging.warn("No ISBN available. Skipping")
-        continue
+            if not book['isbn']:
+                logging.warn("No ISBN available. Skipping")
+                continue
 
-    olib = OaklandLibraryAPI(book['isbn'])
-    if olib.is_available():
-        books_available.append(olib)
+            olib = OaklandLibraryAPI(book['isbn'])
+            if olib.is_available():
+                self.books_available.append(olib)
 
-    if len(books_available) >= NOTIFICATIONS_COUNT:
-        break
+            if len(self.books_available) >= NOTIFICATIONS_COUNT:
+                break
 
-notification_message = ""
+    def notify_user(self):
+        # each time this is called, check for books
+        self.check_books()
+        if not self.books_available:
+            return
 
-for olib in books_available:
-    msg = "Book with title={} is available".format(olib.title())
-    logging.info(msg)
-    notification_message += msg + "\n"
+        notification_message = ""
 
-if notification_message:
-    email_msg = "Subject: {}\n\n{}".format(NOTIFICATION_SUBJECT, notification_message)
+        for olib in self.books_available:
+            msg = "Book with title={} is available".format(olib.title())
+            logging.info(msg)
+            notification_message += msg + "\n"
 
-    logging.debug("Connecting to gmail")
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(NOTIFICATION_SENDER_USER, NOTIFICATION_SENDER_PASS)
-    logging.debug("Connected to gmail")
+        if notification_message:
+            email_msg = "Subject: {}\n\n{}".format(NOTIFICATION_SUBJECT,
+                                                        notification_message)
 
-    logging.debug("Sending email")
-    server.sendmail(NOTIFICATION_SENDER_USER, NOTIFICATION_RECIPIENT, 
-            email_msg)
-    server.quit()
-    logging.info("Email sent")
+            logging.debug("Connecting to gmail")
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(NOTIFICATION_SENDER_USER, NOTIFICATION_SENDER_PASS)
+            logging.debug("Connected to gmail")
+
+            logging.debug("Sending email")
+            server.sendmail(NOTIFICATION_SENDER_USER, NOTIFICATION_RECIPIENT,
+                    email_msg)
+            server.quit()
+            logging.info("Email sent")
+
+if __name__=="__main__":
+    cnb = CheckNotifyBooks()
+    cnb.notify_user()
