@@ -8,6 +8,10 @@ USER_ID = "another-test"
 
 GOODREADS_QUERY_URL = "https://www.goodreads.com/review/list?v=2&key={access_key}&id={user_id}&shelf=to-read&per_page=200&sort=position"
 
+"""
+    Tests for the GoodreadsQueryAPI class. This tests only the happy path
+    for now, since we do not really do any error handling in there
+"""
 class GoodreadsQueryAPITest(TestCase):
     def setUp(self):
         self.gdr = GoodreadsQueryAPI(USER_ID, ACCESS_KEY)
