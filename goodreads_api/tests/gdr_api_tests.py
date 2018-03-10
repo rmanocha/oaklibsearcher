@@ -14,12 +14,16 @@ class GoodreadsQueryAPITest(TestCase):
         with open('goodreads_api/tests/gdr_fixture.xml', 'r') as f:
             self.gdr_fixture = f.read()
 
-    @patch('requests.get')
-    def test_get_books(self, mock_get):
+        get_patcher = patch('requests.get')
+        self.addCleanup(get_patcher.stop)
+        mock_get = get_patcher.start()
+
         mock_response = Mock()
         mock_get.return_value = mock_response
         mock_response.content = self.gdr_fixture
 
+
+    def test_get_books(self):
         books = self.gdr.get_books()
         self.assertEqual(2, len(books))
         self.assertEqual("9780399590566", books[0]['isbn'])
