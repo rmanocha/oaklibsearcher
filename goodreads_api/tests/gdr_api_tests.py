@@ -6,6 +6,8 @@ from goodreads_api import GoodreadsQueryAPI
 ACCESS_KEY = "test"
 USER_ID = "another-test"
 
+GOODREADS_QUERY_URL = "https://www.goodreads.com/review/list?v=2&key={access_key}&id={user_id}&shelf=to-read&per_page=200&sort=position"
+
 class GoodreadsQueryAPITest(TestCase):
     def setUp(self):
         self.gdr = GoodreadsQueryAPI(USER_ID, ACCESS_KEY)
@@ -16,10 +18,10 @@ class GoodreadsQueryAPITest(TestCase):
 
         get_patcher = patch('requests.get')
         self.addCleanup(get_patcher.stop)
-        mock_get = get_patcher.start()
+        self.mock_get = get_patcher.start()
 
         mock_response = Mock()
-        mock_get.return_value = mock_response
+        self.mock_get.return_value = mock_response
         mock_response.content = self.gdr_fixture
 
 
@@ -28,3 +30,6 @@ class GoodreadsQueryAPITest(TestCase):
         self.assertEqual(2, len(books))
         self.assertEqual("9780399590566", books[0]['isbn'])
         self.assertEqual("9780684833392", books[1]['isbn'])
+
+        self.mock_get.assert_called_once_with(GOODREADS_QUERY_URL.format(
+            access_key=ACCESS_KEY, user_id=USER_ID))
