@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from typing import List
 
 from .utils import get_url
 
@@ -7,26 +8,26 @@ SEARCH_URL = DOMAIN + "iii/encore/search/C__S{isbn}__Orightresult__U?lang=eng&su
 AVAILABLE_LIBS_URL = DOMAIN + "{available_libs_url}"
 
 class OaklandLibraryAPI(object):
-    def __init__(self, isbn):
+    def __init__(self, isbn: str):
         self.isbn = isbn
         response = get_url(SEARCH_URL.format(isbn=isbn))
         self.soup = BeautifulSoup(response.content, "lxml")
         self.__verify_results()
 
-    def __verify_results(self):
+    def __verify_results(self) -> bool:
         self.__no_results = self.soup.find('div', {'class': 'tryAgainMessage'}) is not None
 
-    def is_available(self):
+    def is_available(self) -> bool:
         if self.__no_results:
             return False
         return self.soup.find('span', {'class': 'itemsAvailable'}) is not None
 
-    def title(self):
+    def title(self) -> str:
         if self.__no_results:
             return ""
         return self.soup.find('a', id="recordDisplayLink2Component").text.strip()
 
-    def get_libs_available(self):
+    def get_libs_available(self) -> List[str]:
         if self.__no_results:
             return []
 
