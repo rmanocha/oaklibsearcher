@@ -39,7 +39,8 @@ class CheckNotifyBooks(object):
         notification_message = ""
 
         for olib in self.books_available:
-            msg = "Book with title={} is available".format(olib.title())
+            msg = "Book with title={} is available at {}".format(olib.title(),
+                    ", ".join(olib.get_libs_available()))
             logging.info(msg)
             notification_message += msg + "\n"
 
