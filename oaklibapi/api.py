@@ -31,7 +31,7 @@ class OaklandLibraryAPI(object):
         if self.__no_results:
             return []
 
-        available_libs_url = self.soup.find('a', 
+        available_libs_url = self.soup.find('a',
                                 id="showMaxItemsLink2Component").get("href")
         available_libs = BeautifulSoup(
                 get_url(AVAILABLE_LIBS_URL.format(
@@ -44,4 +44,3 @@ class OaklandLibraryAPI(object):
             lib_name_td = tr.find('td')
             available_lib_names.append(lib_name_td.text.strip())
         return available_lib_names
-        
