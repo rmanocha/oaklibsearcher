@@ -2,7 +2,6 @@
 
 export type Branch = string;
 
-
 export type Book = {
   title: string,
   isbn: string,
@@ -10,4 +9,4 @@ export type Book = {
   branches: $ReadOnlyArray<Branch>,
 };
 
-export type APIResponse = Array<Book>;
+export type Results = Array<Book>;
