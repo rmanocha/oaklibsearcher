@@ -1,0 +1,2 @@
+class BranchesNotKnownException(Exception):
+    pass
