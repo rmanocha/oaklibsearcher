@@ -379,8 +379,8 @@ export function withData<P: Object>(
 
   class WithData extends React.Component<P, State> {
     state = {
-      data: { tag: 'loading' },
-      // data: { tag: 'success', results: data },
+      // data: { tag: 'loading' },
+      data: { tag: 'success', results: data },
     };
 
     componentDidMount() {
