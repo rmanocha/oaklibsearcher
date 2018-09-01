@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 from oaklibapi import OaklandLibraryAPI, BranchesNotKnownException
 from goodreads_api import GoodreadsQueryAPI
@@ -10,7 +10,7 @@ from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID
 app = Flask(__name__)
 
 @app.route("/available_books")
-def get_available_books():
+def get_available_books(request):
     gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY)
     books_available = []
 
