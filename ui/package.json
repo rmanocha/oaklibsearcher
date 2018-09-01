@@ -6,8 +6,8 @@
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-loaders": "^3.0.1",
-    "react-scripts": "1.1.5"
+    "react-scripts": "1.1.5",
+    "react-spinners": "^0.4.5"
   },
   "scripts": {
     "start": "react-scripts start",

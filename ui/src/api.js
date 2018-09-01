@@ -1,14 +1,10 @@
 /* @flow */
 
 import { API_URI } from "./config";
-import type { Results } from "./types";
-
-type Response =
-  | { tag: "success", results: Results }
-  | { tag: "error", error: any };
+import type { Response } from "./types";
 
 export function fetchBooks(): Promise<Response> {
-  return fetch(API_URI)
+  return fetch(`${API_URI}/available_books`)
     .then(resp => resp.json())
     .then(results => ({ tag: "success", results }))
     .catch(error => ({
