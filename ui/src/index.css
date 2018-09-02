@@ -1,3 +1,5 @@
+/* resets and font baselining */
+
 * {
   box-sizing: border-box;
 }
@@ -6,15 +8,104 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-
   background-color: #f6f6f6;
+
+  font-size: 16px;
+  line-height: 1.5em;
 }
+
+.small {
+  /* 13px / 18px = 0.8125em */
+  font-size: 0.8125em;
+  line-height: 1.38461538em;
+}
+
+.normal,
+h3 {
+  /* 16px / 24px */
+  font-size: 1em;
+  line-height: 1.5em;
+  /* 24 */
+}
+
+.large,
+h2,
+h1 {
+  /* 26 / 36px */
+  font-size: 1.625em;
+  line-height: 1.38461538em;
+}
+
+.huge {
+  /* 42px / 48px */
+  font-size: 2.625em;
+  line-height: 1.14285714em;
+}
+
+.massive {
+  /* 68px / 72px */
+  font-size: 4.25em;
+  line-height: 1em;
+}
+
+.gigantic {
+  /* 110px / 120px */
+  font-size: 1760em;
+  line-height: 1.09090909em;
+}
+
+h1,
+h2 {
+  margin: 0.92307692em 0 1.38461538em;
+}
+
+h2 {
+  font-weight: normal;
+}
+
+h3 {
+  margin: 1.5em 0 1.5em;
+}
+
+ul,
+ol {
+  margin: 1.5em 0;
+  padding-left: 2.5em;
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  margin: 0;
+}
+
+p {
+  margin-bottom: 1.5em;
+}
+
+@media screen and (min-width: 48em) {
+  h1 {
+    /* 42px / 48px */
+    font-size: 2.625em;
+    line-height: 1.14285714em;
+    margin: 1.14285714em 0 0.57142857em;
+  }
+}
+
+@media screen and (min-width: 117em) {
+  body {
+    /* Zoom baseline grid to 17/16 = 1.0625 */
+    font-size: 1.0625em;
+  }
+}
+
+/* loader styles */
 
 .loader-container {
   width: 100vw;
   height: 100vh;
   padding-bottom: 10vh;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,4 +113,18 @@ body {
 
 .loader-container .square-spin > div {
   border-color: #1769aa;
+}
+
+/* books */
+
+.book-container {
+
+}
+
+.book-title {
+
+}
+
+.branch {
+
 }

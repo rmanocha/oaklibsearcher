@@ -13,7 +13,8 @@ export default class BookCard extends React.Component<Props> {
 
     return (
       <div>
-        <div>{title}</div>
+        <h2>{title}</h2>
+        <ul>{branches.map(b => <li>{b}</li>)}</ul>
       </div>
     );
   }
