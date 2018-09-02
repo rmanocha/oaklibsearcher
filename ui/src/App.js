@@ -3,19 +3,19 @@
 import * as React from "react";
 import type { Response } from "./types";
 
-import Book from "./components/Book";
+import BookList from "./components/BookList";
 import Loader from "./components/Loader";
 
 import { withData, type Data } from "./withData";
 
 class App extends React.Component<{ data: Data }> {
-  render() {
+  _renderInner() {
     const { data } = this.props;
     switch (data.tag) {
       case "success": {
         const { results } = data;
 
-        return results.map(r => <Book book={r} />);
+        return <BookList books={results} />;
       }
       case "loading":
         return <Loader />;
@@ -23,6 +23,14 @@ class App extends React.Component<{ data: Data }> {
       default:
         return null;
     }
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <h1 className="header">OakLib Searcher</h1>
+        {this._renderInner()}
+      </React.Fragment>
+    );
   }
 }
 

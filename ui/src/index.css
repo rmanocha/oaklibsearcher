@@ -117,12 +117,40 @@ p {
 
 /* books */
 
-.book-container {
+.header {
+  text-align: center;
+}
 
+.book-list {
+  width: 100%;
+  max-width: 1200px;
+
+  border-radius: 0.5rem;
+
+  margin: 0 auto;
+}
+
+.book-container {
+  background-color: #fff;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem 0.1875rem;
+
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  overflow: hidden;
+  box-shadow: 4px 4px 24px -8px rgba(0, 0, 0, .4);
 }
 
 .book-title {
-
+  background-color: #444;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: 0.1875rem 1rem;
+  color: #f0f0f0;
+}
+.book-title h2 {
+  margin-bottom: 0.1875rem;
 }
 
 .branch {

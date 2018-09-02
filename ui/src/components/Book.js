@@ -12,8 +12,8 @@ export default class BookCard extends React.Component<Props> {
     const { title, isbn, available, branches } = this.props.book;
 
     return (
-      <div>
-        <h2>{title}</h2>
+      <div className="book-container">
+        <div className="book-title"><h2>{title}</h2></div>
         <ul>{branches.map(b => <li>{b}</li>)}</ul>
       </div>
     );

@@ -5,7 +5,7 @@ import type { Response } from "./types";
 
 export function fetchBooks(): Promise<Response> {
 
-  // return Promise.resolve({ tag: 'success', results: data });
+  return Promise.resolve({ tag: 'success', results: data });
 
   return fetch(`${API_URI}/available_books`)
     .then(resp => resp.text())
@@ -17,12 +17,6 @@ export function fetchBooks(): Promise<Response> {
 }
 
 const data = [
-  {
-    "available": false, 
-    "branches": [], 
-    "isbn": "9780143058144", 
-    "title": ""
-  }, 
   {
     "available": true, 
     "branches": [
