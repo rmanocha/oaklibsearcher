@@ -20,6 +20,7 @@ class App extends React.Component<{ data: Data }> {
       case "loading":
         return <Loader />;
       case "error":
+        return <div>Error fetching</div>;
       default:
         return null;
     }
