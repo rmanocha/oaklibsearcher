@@ -3,18 +3,20 @@ from flask import Flask, jsonify, request
 from oaklibapi import OaklandLibraryAPI, BranchesNotKnownException
 from goodreads_api import GoodreadsQueryAPI
 
+import datetime
 import logging
 
 from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID
 
+from werkzeug.contrib.atom import AtomFeed
+
 app = Flask(__name__)
 
-@app.route("/available_books")
-def get_available_books(request):
+def get_books_branches():
     gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY)
     books_available = []
 
-    for book in gdr.get_books():
+    for book in gdr.get_books()[:5]:
         logging.info("Looking for title={}, ISBN={}".format(
                                             book['title'], book['isbn']))
         if not book['isbn']:
@@ -35,6 +37,23 @@ def get_available_books(request):
 
         books_available.append(book_data)
 
+    return books_available
 
-    return jsonify(books_available)
+@app.route("/available_books")
+def get_available_books():
+    return jsonify(get_books_branches())
 
+@app.route("/available_books.atom")
+def get_available_books_rss():
+    books_available = get_books_branches()
+
+    feed = AtomFeed("Available Books", feed_url=request.url,
+            url=request.url_root)
+    for book in books_available:
+        if book["available"]:
+            content = "{} (isbn={}) is available at {}".format(book["title"],
+                    book["isbn"], ",".join(book["branches"]))
+            feed.add(book["title"], content, updated=datetime.datetime.now(),
+                    id=book["isbn"], content_type="text")
+
+    return feed.get_response()
