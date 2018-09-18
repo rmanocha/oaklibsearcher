@@ -16,7 +16,7 @@ def get_books_branches():
     gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY)
     books_available = []
 
-    for book in gdr.get_books()[:5]:
+    for book in gdr.get_books():
         logging.info("Looking for title={}, ISBN={}".format(
                                             book['title'], book['isbn']))
         if not book['isbn']:
