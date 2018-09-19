@@ -6,14 +6,15 @@ from goodreads_api import GoodreadsQueryAPI
 import datetime
 import logging
 
-from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID
+from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID, GOODREADS_COUNT
 
 from werkzeug.contrib.atom import AtomFeed
 
 app = Flask(__name__)
 
 def get_books_branches():
-    gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY)
+    gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY,
+                            GOODREADS_COUNT)
     books_available = []
 
     for book in gdr.get_books():
@@ -54,6 +55,6 @@ def get_available_books_rss():
             content = "{} (isbn={}) is available at {}".format(book["title"],
                     book["isbn"], ",".join(book["branches"]))
             feed.add(book["title"], content, updated=datetime.datetime.now(),
-                    id=book["isbn"], content_type="text")
+                    id=request.url_root + book["isbn"], content_type="text")
 
     return feed.get_response()
