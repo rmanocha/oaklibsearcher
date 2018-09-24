@@ -55,6 +55,6 @@ def get_available_books_rss():
             content = "{} (isbn={}) is available at {}".format(book["title"],
                     book["isbn"], ",".join(book["branches"]))
             feed.add(book["title"], content, updated=datetime.datetime.now(),
-                    id=request.url_root + book["isbn"], content_type="text")
+                    url=request.url_root + book["isbn"], content_type="text")
 
     return feed.get_response()
