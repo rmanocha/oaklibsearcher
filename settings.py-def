@@ -1,7 +1,9 @@
 import logging
+import os
 
 GOODREADS_ACCESS_KEY={access_key}
 GOODREADS_USER_ID={user_id}
+GOODREADS_COUNT = os.environ.get("GOODREADS_COUNT", 10) # default is 10 items
 
 NOTIFICATIONS_COUNT = 5 // # of books to notify about availability
 NOTIFICATION_RECIPIENT = {email_address}

@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from typing import List
 
+from .exceptions import BranchesNotKnownException
 from .utils import get_url
 
 DOMAIN = "http://encore.oaklandlibrary.org/"
@@ -31,8 +32,15 @@ class OaklandLibraryAPI(object):
         if self.__no_results:
             return []
 
-        available_libs_url = self.soup.find('a',
-                                id="showMaxItemsLink2Component").get("href")
+        try:
+            available_libs_url = self.soup.find('a',
+                                    id="showMaxItemsLink2Component").get("href")
+        except AttributeError:
+            # so far, I've only seen this when there's only one copy of the 
+            # book available. In those cases, the "show only available..." 
+            # checkbox is not available and neither is the URL. Let's just 
+            # exit out of this process for now when that happens
+            raise BranchesNotKnownException("Unable to fetch branches")
         available_libs = BeautifulSoup(
                 get_url(AVAILABLE_LIBS_URL.format(
                             available_libs_url=available_libs_url)).content,
