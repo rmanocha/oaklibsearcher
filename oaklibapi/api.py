@@ -1,3 +1,5 @@
+import logging
+
 from bs4 import BeautifulSoup
 from typing import List
 
@@ -29,6 +31,7 @@ class OaklandLibraryAPI(object):
         return self.soup.find('a', id="recordDisplayLink2Component").text.strip()
 
     def get_libs_available(self) -> List[str]:
+        logging.info("Looking for branches for title={}".format(self.title()))
         if self.__no_results:
             return []
 
