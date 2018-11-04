@@ -40,15 +40,15 @@ def get_books_branches():
 
     return books_available
 
-@app.route("/available_books")
+@app.route("/oaklibatom/available_books")
 def get_available_books():
     return jsonify(get_books_branches())
 
-@app.route("/available_books.atom")
+@app.route("/oaklibatom/available_books.atom")
 def get_available_books_rss():
     books_available = get_books_branches()
 
-    feed = AtomFeed("Available Books", feed_url=request.url,
+    feed = AtomFeed("Available Books", feed_url=request.url_root + "oaklibatom/available_books.atom",
             url=request.url_root)
     for book in books_available:
         if book["available"]:
