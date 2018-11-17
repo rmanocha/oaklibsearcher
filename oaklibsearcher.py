@@ -7,7 +7,7 @@ from goodreads_api import GoodreadsQueryAPI
 
 from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID
 
-gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY)
+gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY, 10)
 
 async def print_book_data(book):
     logging.info("Looking for title={}, ISBN={}".format(
@@ -22,6 +22,8 @@ async def print_book_data(book):
         "title": olib.title(),
         "available": olib.is_available(),
     }
+    logging.info("About to sleep for 2 seconds")
+    await asyncio.sleep(2)
     if not olib.is_available():
         logging.info("title={} not available".format(book['title']))
 
@@ -33,30 +35,28 @@ async def print_book_data(book):
 
     return book_data
 
-    #logging.info("Looking for title={}, ISBN={}".format(book['title'], book['isbn']))
-    #if not book['isbn']:
-    #    return "No ISBN available. Skipping"
-
-    #olib = OaklandLibraryAPI(book['isbn'])
-    #logging.info("Done searching for title={}".format(olib.title()))
-
-    #return "Book with title={} is {}".format(olib.title(), 
-    #    "available" if olib.is_available() else "not available")
-
 async def main():
     values = []
     for book in gdr.get_books():
         values.append(asyncio.create_task(print_book_data(book)))
 
     for value in values:
-        print(await value)
+        #print(await value)
+        await value
 
 async def main_regular():
     for book in gdr.get_books():
-        print(await print_book_data(book))
+        await print_book_data(book)
 
+gdr.get_books()
+logging.info("Time with full asyncio")
 start = datetime.datetime.now()
-#asyncio.run(main())
+asyncio.run(main())
+end = datetime.datetime.now()
+logging.info("Time spent={}".format(end - start))
+
+logging.info("Time without asyncio")
+start = datetime.datetime.now()
 asyncio.run(main_regular())
 end = datetime.datetime.now()
-print(end - start)
+logging.info("Time spent={}".format(end - start))
