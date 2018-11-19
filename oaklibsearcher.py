@@ -10,8 +10,10 @@ from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID
 gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY, 10)
 
 async def print_book_data(book):
-    logging.info("Looking for title={}, ISBN={}".format(
-                                            book['title'], book['isbn']))
+    start = datetime.datetime.now()
+    log_str = "title={}, ISBN={}".format(book['title'], book['isbn'])
+    logging.info("Looking for {}".format(log_str))
+
     if not book['isbn']:
         logging.warn("No ISBN available. Skipping")
         return {}
@@ -33,6 +35,8 @@ async def print_book_data(book):
     except BranchesNotKnownException:
         book_data["branches"] = ["Unable to retrieve branches"]
 
+    end = datetime.datetime.now()
+    logging.info("Time take for {} was {}".format(log_str, end - start))
     return book_data
 
 async def main():
