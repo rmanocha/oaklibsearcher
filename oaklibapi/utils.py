@@ -1,7 +1,8 @@
 import logging
-import requests
+import aiohttp
+import asyncio
 
-def get_url(url):
+async def fetch_url(session, url):
     logging.debug("Fetching URL={}".format(url))
-    return requests.get(url)
-
+    async with session.get(url) as response:
+        return await response.text()

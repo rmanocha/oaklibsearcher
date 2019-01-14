@@ -1,2 +1,2 @@
 from .api import OaklandLibraryAPI
-from .exceptions import BranchesNotKnownException
+from .exceptions import BranchesNotKnownException, BookNotFoundException
