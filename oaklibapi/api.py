@@ -25,9 +25,6 @@ class OaklandLibraryAPI(object):
     def __init__(self, session: aiohttp.ClientSession, isbn: str):
         self.isbn = isbn
         self.session = session
-        #response = get_url(SEARCH_URL.format(isbn=isbn))
-        #self.soup = BeautifulSoup(response.content, "lxml")
-        #self.__verify_results()
 
     async def get_book(self) -> LibBook:
         html = await fetch_url(self.session, SEARCH_URL.format(isbn=self.isbn))
@@ -42,11 +39,6 @@ class OaklandLibraryAPI(object):
 
     def __verify_results(self):
         self.__no_results = self.soup.find('div', {'class': 'tryAgainMessage'}) is not None
-
-    #def is_available(self) -> bool:
-    #    if self.__no_results:
-    #        return False
-    #    return self.soup.find('span', {'class': 'itemsAvailable'}) is not None
 
     def __get_title(self) -> str:
         if self.__no_results:
