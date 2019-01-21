@@ -33,7 +33,10 @@ class OaklandLibraryAPI(object):
         if self.__no_results:
             raise BookNotFoundException("ISBN: {}".format(self.isbn))
 
-        branches = await self.__get_libs_available()
+        try:
+            branches = await self.__get_libs_available()
+        except BranchesNotKnownException:
+            branches = []
 
         return LibBook(self.isbn, self.__get_title(), branches)
 
@@ -65,9 +68,12 @@ class OaklandLibraryAPI(object):
                 "lxml")
 
         available_lib_names = []
-        for tr in available_libs.find('table', {'class': 'itemTable'}). \
-                                                            findAll('tr')[1:]:
-            lib_name_td = tr.find('td')
-            available_lib_names.append(lib_name_td.text.strip())
+        try:
+            for tr in available_libs.find('table', {'class': 'itemTable'}). \
+                                                                findAll('tr')[1:]:
+                lib_name_td = tr.find('td')
+                available_lib_names.append(lib_name_td.text.strip())
+        except AttributeError: #TODO: Understand why this happens. Was happening for "Grant"
+            raise BranchesNotKnownException("Unable to fetch branches")
         return available_lib_names
 

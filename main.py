@@ -1,6 +1,8 @@
-from flask import Flask, jsonify, request
+import aiohttp
+import asyncio
+from quart import Quart, jsonify, request
 
-from oaklibapi import OaklandLibraryAPI, BranchesNotKnownException
+from oaklibapi import OaklandLibraryAPI, BranchesNotKnownException, BookNotFoundException
 from goodreads_api import GoodreadsQueryAPI
 
 import datetime
@@ -10,39 +12,42 @@ from settings import GOODREADS_ACCESS_KEY, GOODREADS_USER_ID, GOODREADS_COUNT
 
 from werkzeug.contrib.atom import AtomFeed
 
-app = Flask(__name__)
+app = Quart(__name__)
 
-def get_books_branches():
+async def print_book_data(book, session):
+    log_str = "title={}, ISBN={}".format(book['title'], book['isbn'])
+    logging.info("Looking for {}".format(log_str))
+
+    if not book['isbn']:
+        logging.warn("No ISBN available. Skipping")
+        return {}
+
+    olib = OaklandLibraryAPI(session, book['isbn'])
+    try:
+        olib = await olib.get_book()
+    except BookNotFoundException:
+        olib = None
+
+    return olib
+
+async def get_books_branches():
     gdr = GoodreadsQueryAPI(GOODREADS_USER_ID, GOODREADS_ACCESS_KEY,
                             GOODREADS_COUNT)
+    values = []
     books_available = []
 
-    for book in gdr.get_books():
-        logging.info("Looking for title={}, ISBN={}".format(
-                                            book['title'], book['isbn']))
-        if not book['isbn']:
-            logging.warn("No ISBN available. Skipping")
-            continue
+    async with aiohttp.ClientSession() as session:
+        for book in gdr.get_books():
+            values.append(asyncio.create_task(print_book_data(book, session)))
 
-        olib = OaklandLibraryAPI(book['isbn'])
-        book_data = {
-            "isbn": book['isbn'],
-            "title": olib.title(),
-            "available": olib.is_available(),
-        }
-        try:
-            book_data["branches"] = olib.get_libs_available() if \
-                                                    olib.is_available() else []
-        except BranchesNotKnownException:
-            book_data["branches"] = ["Unable to retrieve branches"]
-
-        books_available.append(book_data)
+            for value in values:
+                books_available.append(await value)
 
     return books_available
 
 @app.route("/oaklibatom/available_books")
-def get_available_books():
-    return jsonify(get_books_branches())
+async def get_available_books():
+    return jsonify(await get_books_branches())
 
 @app.route("/oaklibatom/available_books.atom")
 def get_available_books_rss():
