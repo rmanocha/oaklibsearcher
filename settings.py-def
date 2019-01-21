@@ -13,3 +13,4 @@ NOTIFICATION_SENDER_PASS = {email_password}
 LOGGING_LEVEL = logging.INFO
 logging.basicConfig(filename="oaklib.log", level=LOGGING_LEVEL,
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.getLogger('asyncio').setLevel(logging.WARNING)
