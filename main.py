@@ -1,6 +1,6 @@
 import aiohttp
 import asyncio
-from quart import Quart, jsonify, request, Response
+from quart import Quart, jsonify, request
 
 from oaklibapi import OaklandLibraryAPI, BranchesNotKnownException, BookNotFoundException
 from goodreads_api import GoodreadsQueryAPI
@@ -45,8 +45,8 @@ async def get_books_branches():
 
     return books_available
 
-@app.route("/oaklibatom/available_books")
-async def get_available_books():
+@app.route("/oaklibsearcherasync/available_books")
+async def get_available_books(request):
     books = await get_books_branches()
     ret_books = []
     for book in books:
@@ -54,8 +54,8 @@ async def get_available_books():
             ret_books.append({"title": book.title, "isbn": book.isbn, "branches": book.branches})
     return jsonify(ret_books)
 
-@app.route("/oaklibatom/available_books.atom")
-async def get_available_books_rss():
+@app.route("/oaklibsearcherasync/available_books.atom")
+async def get_available_books_rss(request):
     books_available = await get_books_branches()
 
     feed = AtomFeed("Available Books",
@@ -68,4 +68,4 @@ async def get_available_books_rss():
             feed.add(book.title, content, updated=datetime.datetime.now(),
                     url=request.url_root + book.isbn, content_type="text")
 
-    return Response(response=feed.to_string(), mimetype="application/atom+xml")
+    return feed.to_string(), 200, {"Content-Type": "application/atom+xml; charset=utf-8"}
